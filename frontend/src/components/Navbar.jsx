@@ -39,7 +39,7 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
             ? "bg-[#FDFCF8]/95 backdrop-blur-md shadow-sm py-4"
-            : "bg-transparent py-6"
+            : "bg-[#2C2C2C]/80 backdrop-blur-sm py-6"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -56,10 +56,14 @@ export default function Navbar() {
             >
               <span className="font-accent text-3xl text-[#D4AF37]">RM</span>
               <div className="hidden sm:block">
-                <span className="font-heading text-xl font-semibold text-[#2C2C2C] tracking-tight">
+                <span className={`font-heading text-xl font-semibold tracking-tight transition-colors duration-300 ${
+                  isScrolled ? "text-[#2C2C2C]" : "text-white"
+                }`}>
                   Roti Manis
                 </span>
-                <span className="block text-[0.65rem] uppercase tracking-[0.3em] text-[#8B5E3C] -mt-1">
+                <span className={`block text-[0.65rem] uppercase tracking-[0.3em] -mt-1 transition-colors duration-300 ${
+                  isScrolled ? "text-[#8B5E3C]" : "text-[#D4AF37]"
+                }`}>
                   Bakery
                 </span>
               </div>
@@ -75,7 +79,9 @@ export default function Navbar() {
                     e.preventDefault();
                     scrollToSection(link.href);
                   }}
-                  className="nav-link font-body"
+                  className={`font-body text-xs uppercase tracking-[0.15em] transition-colors duration-300 hover:text-[#D4AF37] ${
+                    isScrolled ? "text-[#2C2C2C]" : "text-white"
+                  }`}
                   data-testid={`nav-${link.name.toLowerCase()}`}
                 >
                   {link.name}
@@ -91,7 +97,11 @@ export default function Navbar() {
                   e.preventDefault();
                   scrollToSection("#kontak");
                 }}
-                className="btn-primary"
+                className={`px-6 py-3 text-xs uppercase tracking-widest font-medium transition-all duration-300 ${
+                  isScrolled 
+                    ? "bg-[#2C2C2C] text-white hover:bg-[#8B5E3C]" 
+                    : "bg-[#D4AF37] text-[#2C2C2C] hover:bg-white"
+                }`}
                 data-testid="order-now-btn"
               >
                 Pesan Sekarang
@@ -105,7 +115,9 @@ export default function Navbar() {
               aria-label="Open menu"
               data-testid="mobile-menu-btn"
             >
-              <Menu className="w-6 h-6 text-[#2C2C2C]" />
+              <Menu className={`w-6 h-6 transition-colors duration-300 ${
+                isScrolled ? "text-[#2C2C2C]" : "text-white"
+              }`} />
             </button>
           </div>
         </div>
