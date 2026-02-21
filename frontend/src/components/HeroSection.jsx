@@ -94,7 +94,7 @@ export default function HeroSection() {
       >
         <button
           onClick={scrollToProducts}
-          className="flex flex-col items-center text-[#6B5B54] hover:text-[#8B5E3C] transition-colors"
+          className="flex flex-col items-center text-white/80 hover:text-[#D4AF37] transition-colors"
           aria-label="Scroll down"
         >
           <span className="text-xs uppercase tracking-widest mb-2 font-body">Scroll</span>
