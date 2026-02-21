@@ -37,12 +37,12 @@ export default function HeroSection() {
 
           {/* Main heading */}
           <h1
-            className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold text-[#2C2C2C] leading-[0.95] tracking-tight hero-text-shadow animate-fade-up opacity-0"
-            style={{ animationDelay: "0.4s", animationFillMode: "forwards" }}
+            className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight animate-fade-up opacity-0"
+            style={{ animationDelay: "0.4s", animationFillMode: "forwards", textShadow: "0 2px 20px rgba(0,0,0,0.3)" }}
           >
             Roti Manis
             <br />
-            <span className="text-[#8B5E3C]">Bakery</span>
+            <span className="text-[#D4AF37]">Bakery</span>
           </h1>
 
           {/* Divider */}
@@ -53,8 +53,8 @@ export default function HeroSection() {
 
           {/* Subtitle */}
           <p
-            className="font-body text-lg md:text-xl text-[#6B5B54] max-w-xl leading-relaxed mt-6 animate-fade-up opacity-0"
-            style={{ animationDelay: "0.8s", animationFillMode: "forwards" }}
+            className="font-body text-lg md:text-xl text-white/90 max-w-xl leading-relaxed mt-6 animate-fade-up opacity-0"
+            style={{ animationDelay: "0.8s", animationFillMode: "forwards", textShadow: "0 1px 10px rgba(0,0,0,0.3)" }}
           >
             Nikmati kelezatan roti artisan berkualitas premium, 
             dipanggang dengan cinta menggunakan resep warisan keluarga.
