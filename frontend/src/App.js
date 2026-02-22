@@ -20,34 +20,120 @@ import OrderModal from "./components/OrderModal";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+// Default products data - tampil langsung tanpa loading
+const defaultProducts = [
+  {
+    id: "1",
+    name: "Croissant Premium",
+    description: "Croissant butter klasik dengan lapisan renyah sempurna",
+    price: 35000,
+    category: "Pastry",
+    image_url: "https://images.pexels.com/photos/8105060/pexels-photo-8105060.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    is_featured: true
+  },
+  {
+    id: "2",
+    name: "Sourdough Artisan",
+    description: "Roti sourdough dengan fermentasi alami 24 jam",
+    price: 85000,
+    category: "Roti",
+    image_url: "https://images.pexels.com/photos/1775043/pexels-photo-1775043.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    is_featured: true
+  },
+  {
+    id: "3",
+    name: "Wedding Cake Elegant",
+    description: "Kue pengantin mewah dengan dekorasi bunga segar",
+    price: 2500000,
+    category: "Kue",
+    image_url: "https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    is_featured: true
+  },
+  {
+    id: "4",
+    name: "Pain au Chocolat",
+    description: "Pastry lembut dengan cokelat Belgium premium",
+    price: 42000,
+    category: "Pastry",
+    image_url: "https://images.pexels.com/photos/2135/food-france-morning-breakfast.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    is_featured: false
+  },
+  {
+    id: "5",
+    name: "Baguette Klasik",
+    description: "Baguette Prancis dengan kulit renyah dan lembut di dalam",
+    price: 45000,
+    category: "Roti",
+    image_url: "https://images.pexels.com/photos/1387070/pexels-photo-1387070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    is_featured: false
+  },
+  {
+    id: "6",
+    name: "Birthday Cake Deluxe",
+    description: "Kue ulang tahun dengan buttercream dan fondant premium",
+    price: 650000,
+    category: "Kue",
+    image_url: "https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    is_featured: true
+  }
+];
+
+const defaultTestimonials = [
+  {
+    id: "1",
+    name: "Sarah Wijaya",
+    message: "Roti terenak yang pernah saya coba! Croissant-nya sangat renyah dan butter-nya terasa premium. Pasti akan kembali lagi!",
+    rating: 5,
+    avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100&w=100"
+  },
+  {
+    id: "2",
+    name: "Budi Santoso",
+    message: "Wedding cake dari Roti Manis membuat acara pernikahan kami sempurna. Desainnya elegan dan rasanya luar biasa!",
+    rating: 5,
+    avatar: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100&w=100"
+  },
+  {
+    id: "3",
+    name: "Maya Putri",
+    message: "Sourdough artisan mereka adalah yang terbaik di kota! Fermentasi sempurna dan teksturnya sangat nikmat.",
+    rating: 5,
+    avatar: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=100&w=100"
+  }
+];
+
 function App() {
-  const [products, setProducts] = useState([]);
-  const [testimonials, setTestimonials] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Langsung gunakan default data, tidak perlu loading state
+  const [products, setProducts] = useState(defaultProducts);
+  const [testimonials, setTestimonials] = useState(defaultTestimonials);
   const [orderModalOpen, setOrderModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    const initializeData = async () => {
+    // Fetch data dari API di background (optional update)
+    const fetchData = async () => {
       try {
         // Seed data first
-        await axios.post(`${API}/seed`);
+        axios.post(`${API}/seed`).catch(() => {});
         
-        // Fetch products
+        // Fetch products (update jika berhasil)
         const productsRes = await axios.get(`${API}/products`);
-        setProducts(productsRes.data);
+        if (productsRes.data && productsRes.data.length > 0) {
+          setProducts(productsRes.data);
+        }
         
-        // Fetch testimonials
+        // Fetch testimonials (update jika berhasil)
         const testimonialsRes = await axios.get(`${API}/testimonials`);
-        setTestimonials(testimonialsRes.data);
+        if (testimonialsRes.data && testimonialsRes.data.length > 0) {
+          setTestimonials(testimonialsRes.data);
+        }
       } catch (error) {
-        console.error("Error initializing data:", error);
-      } finally {
-        setLoading(false);
+        // Jika API error, tetap gunakan default data
+        console.log("Using default data");
       }
     };
 
-    initializeData();
+    fetchData();
   }, []);
 
   const handleOrderClick = (product) => {
