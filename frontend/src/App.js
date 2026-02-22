@@ -177,11 +177,11 @@ function App() {
         <AboutSection />
         <ProductsSection 
           products={products} 
-          loading={loading}
+          loading={false}
           onOrderClick={handleOrderClick}
         />
         <GallerySection />
-        <TestimonialsSection testimonials={testimonials} loading={loading} />
+        <TestimonialsSection testimonials={testimonials} loading={false} />
         <LocationSection />
         <ContactSection onSubmit={handleContactSubmit} />
       </main>
